@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Editor</title>
+    <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #454545;
+            display: flex;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .left,
+        .right {
+            flex-basis: 50%;
+            padding: 10px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #fff;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            margin-bottom: 10px;
+            font-family: monospace;
+            background-color: black;
+            color: #fff;
+            font-size: 18px;
+            border: 1px solid #ccc;
+        }
+
+        iframe {
+            width: 100%;
+            height: 77%;
+            background: #fff;
+            border: 0;
+            outline: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <label for="Html-code"><i class="fa-brands fa-html5"></i> HTML</label>
+            <textarea id="Html-code" onkeyup="run()"></textarea>
+
+            <label for="css-code"><i class="fa-brands fa-css3-alt"></i> CSS</label>
+            <textarea id="css-code" onkeyup="run()"></textarea>
+
+            <label for="js-code"><i class="fa-brands fa-js"></i> JS</label>
+            <textarea id="js-code" onkeyup="run()"></textarea>
+        </div>
+        <div class="right">
+            <label><i class="fa-solid fa-play"></i> Output</label>
+            <iframe id="output"></iframe>
+        </div>
+    </div>
+    <script>
+        function run() {
+            let htmlcode = document.getElementById("Html-code").value;
+            let csscode = document.getElementById("css-code").value;
+            let jscode = document.getElementById("js-code").value;
+
+            let output = document.getElementById("output");
+            output.contentDocument.body.innerHTML = htmlcode + "<style>" + csscode + "</style>";
+            const script = document.createElement('script');
+            script.textContent = jscode;
+            output.contentDocument.body.appendChild(script);
+        }
+    </script>
+</body>
+</html>
